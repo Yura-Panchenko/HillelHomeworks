@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form>
+        <h1>We would like to help you</h1>
+        <input type="text" name="name" id="name" placeholder="Name">
+        <span class="name-message hidden">* name is reqiered</span>
+        <textarea name="message" id="message" placeholder="Message"></textarea>
+        <span class="message-message hidden">* >5</span>
+        <h2>How to answer you?</h2>
+        <input type="tel" name="phone" id="tel" placeholder="Phone nuber">
+        <span class="tel-message hidden">* phone number is reqiuered, must begin with +380</span>
+        <input type="email" name="email" id="email" placeholder="Email">
+        <span class="email-message hidden">* email is reqiered, must contain "@" and "."</span>
+        <input type="button" name="button" id="button" value="Send Message">
+    </form>
+    <script src="app.js"></script>
+</body>
+</html>

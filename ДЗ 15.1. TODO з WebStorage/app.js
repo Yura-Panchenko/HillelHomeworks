@@ -24,6 +24,11 @@ function getToDos() {
     return toDos ? toDos : [];
 }
 
+function removeAllToDos() {
+    const allToDos = document.querySelectorAll('.toDo');
+    allToDos.forEach(toDo => toDo.remove());
+}
+
 function showToDos() {
     const toDos = getToDos();
     if (toDos == undefined) {
@@ -34,41 +39,6 @@ function showToDos() {
         createToDo(toDo.id, toDo.checkbox, toDo.value);
     });
 }
-
-function removeAllToDos() {
-    const allToDos = document.querySelectorAll('.toDo');
-    allToDos.forEach(toDo => toDo.remove());
-}
-
-showToDos();
-
-addBtn.addEventListener('click', () => {
-    if (addToDo.value === "") return;
-    const currentCounter = increaseCounter(getCounter());
-    createToDo(currentCounter, "default", addToDo.value);
-    addToStorage(currentCounter, "default", addToDo.value);
-    addToDo.value = "";
-});
-
-form.addEventListener('click', (event) => {
-    if (event.target.classList.contains("removeBtn")) {
-        event.target.parentElement.remove();
-        const id = event.target.parentElement.getAttribute('data-id');
-        deleteTodo(id);
-    }
-});
-
-form.addEventListener('click', (event) => {
-    if (event.target.type === "checkbox") {
-        const checkbox = event.target;
-        const valueSpan = checkbox.nextElementSibling;
-        valueSpan.classList.toggle('done');
-
-        let checkboxStatus = valueSpan.classList.contains('done') ? 'checked' : 'default';
-        const id = checkbox.parentElement.parentElement.getAttribute('data-id');
-        changeCheckbox(id, checkboxStatus);
-    }
-});
 
 function createToDo(id, checkboxStatus, inputValue) {
     const parentDiv = document.createElement('div');
@@ -132,3 +102,33 @@ function deleteTodo(id) {
     }
     localStorage.setItem('toDos', JSON.stringify(toDos));
 }
+
+showToDos();
+
+addBtn.addEventListener('click', () => {
+    if (addToDo.value === "") return;
+    const currentCounter = increaseCounter(getCounter());
+    createToDo(currentCounter, "default", addToDo.value);
+    addToStorage(currentCounter, "default", addToDo.value);
+    addToDo.value = "";
+});
+
+form.addEventListener('click', (event) => {
+    if (event.target.classList.contains("removeBtn")) {
+        event.target.parentElement.remove();
+        const id = event.target.parentElement.getAttribute('data-id');
+        deleteTodo(id);
+    }
+});
+
+form.addEventListener('click', (event) => {
+    if (event.target.type === "checkbox") {
+        const checkbox = event.target;
+        const valueSpan = checkbox.nextElementSibling;
+        valueSpan.classList.toggle('done');
+        
+        let checkboxStatus = valueSpan.classList.contains('done') ? 'checked' : 'default';
+        const id = checkbox.parentElement.parentElement.getAttribute('data-id');
+        changeCheckbox(id, checkboxStatus);
+    }
+});
